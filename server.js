@@ -16,13 +16,18 @@ function runServer() {
         res.sendFile(path.join(__dirname, "database.json"));
     });
 
+    app.get('/archive', (req,res) => {
+        res.header("Content-Type", "application/json");
+        res.sendFile(path.join(__dirname, "archive.json"));
+    })
+
     app.post('/delete', (req,res) => {
         deleteTodo(req.body.id);
         res.sendFile(path.join(__dirname, "database.json"));
     });
 
     app.post('/complete', (req,res) => {
-        completeTodo(req.body.id);
+        completeTodo(req.body);
         res.sendFile(path.join(__dirname, "database.json"));
     });
 
@@ -30,6 +35,7 @@ function runServer() {
         addTodo(req.body);
         res.sendFile(path.join(__dirname, "database.json"));
     });
+
 
 
     var port = 5000;
@@ -51,20 +57,32 @@ function deleteTodo(deleteID) {
     fs.writeFileSync('./database.json', JSON.stringify(json));
 }
 
-function completeTodo(completeID) {
+function completeTodo(todo) {
     var fs = require('fs');
 
-    var jsonFile = JSON.parse(fs.readFileSync(path.join(__dirname, 'database.json')));
+    var databaseFile = JSON.parse(fs.readFileSync(path.join(__dirname, 'database.json')));
 
-    var json = [];
+   
 
-    jsonFile.forEach((line) => {
-        if (line.id == completeID) {
-            line.completed = true;
+    var json1 = [];
+    var json2 = [];
+
+    databaseFile.forEach((line) => {
+        if (line.id == todo.id) {
+            json2.push(todo);
         }
-        json.push(line);
+        json1.push(line);
     });
-    fs.writeFileSync('./database.json', JSON.stringify(json));
+    fs.writeFileSync('./database.json', JSON.stringify(json1));
+    
+
+    var archiveFile = JSON.parse(fs.readFileSync(path.join(__dirname, "archive.json")));
+
+    archiveFile.forEach((line) => {
+        json2.push(line);
+    });
+
+    fs.writeFileSync('./archive.json', JSON.stringify(json2));
 }
 
 function addTodo(data) {

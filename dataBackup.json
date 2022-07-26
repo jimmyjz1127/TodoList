@@ -2,66 +2,92 @@
     {
       "id": 1,
       "title": "Take out the trash",
-      "completed": false
+      "completed": false,
+      "created" : "Tue Jul 26 2022 16:22:32 GMT-0400 (Eastern Daylight Time)",
+      "finished" : "Tue Jul 26 2022 16:22:32 GMT-0400 (Eastern Daylight Time)"
     },
     {
       "id": 2,
       "title": "Prepare dinner",
-      "completed": false
+      "completed": false,
+      "created" : "Tue Jul 26 2022 16:22:32 GMT-0400 (Eastern Daylight Time)",
+      "finished" : "Tue Jul 26 2022 16:22:32 GMT-0400 (Eastern Daylight Time)"
     },
     {
       "id": 3,
       "title": "Complete practice problems",
-      "completed": false
+      "completed": false,
+      "created" : "Tue Jul 26 2022 16:22:32 GMT-0400 (Eastern Daylight Time)",
+      "finished" : "Tue Jul 26 2022 16:22:32 GMT-0400 (Eastern Daylight Time)"
     },
     {
       "id": 4,
       "title": "Schedule Doctors Appointment",
-      "completed": false
+      "completed": false,
+      "created" : "Tue Jul 26 2022 16:22:32 GMT-0400 (Eastern Daylight Time)",
+      "finished" : "Tue Jul 26 2022 16:22:32 GMT-0400 (Eastern Daylight Time)"
     },
     {
       "id": 5,
       "title": "Sign up for courses",
-      "completed": false
+      "completed": false,
+      "created" : "Tue Jul 26 2022 16:22:32 GMT-0400 (Eastern Daylight Time)",
+      "finished" : "Tue Jul 26 2022 16:22:32 GMT-0400 (Eastern Daylight Time)"
     },
     {
       "id": 6,
       "title": "Workout",
-      "completed": false
+      "completed": false,
+      "created" : "Tue Jul 26 2022 16:22:32 GMT-0400 (Eastern Daylight Time)",
+      "finished" : "Tue Jul 26 2022 16:22:32 GMT-0400 (Eastern Daylight Time)"
     },
     {
       "id": 7,
       "title": "Take car to mechanic",
-      "completed": false
+      "completed": false,
+      "created" : "Tue Jul 26 2022 16:22:32 GMT-0400 (Eastern Daylight Time)",
+      "finished" : "Tue Jul 26 2022 16:22:32 GMT-0400 (Eastern Daylight Time)"
     },
     {
       "id": 8,
       "title": "Order new supplies",
-      "completed": false
+      "completed": false,
+      "created" : "Tue Jul 26 2022 16:22:32 GMT-0400 (Eastern Daylight Time)",
+      "finished" : "Tue Jul 26 2022 16:22:32 GMT-0400 (Eastern Daylight Time)"
     },
     {
       "id": 9,
       "title": "Call office",
-      "completed": false
+      "completed": false,
+      "created" : "Tue Jul 26 2022 16:22:32 GMT-0400 (Eastern Daylight Time)",
+      "finished" : "Tue Jul 26 2022 16:22:32 GMT-0400 (Eastern Daylight Time)"
     },
     {
       "id": 10,
       "title": "Work on resume",
-      "completed": false
+      "completed": false,
+      "created" : "Tue Jul 26 2022 16:22:32 GMT-0400 (Eastern Daylight Time)",
+      "finished" : "Tue Jul 26 2022 16:22:32 GMT-0400 (Eastern Daylight Time)"
     },
     {
       "id": 11,
       "title": "Learn how to use express",
-      "completed": false
+      "completed": false,
+      "created" : "Tue Jul 26 2022 16:22:32 GMT-0400 (Eastern Daylight Time)",
+      "finished" : "Tue Jul 26 2022 16:22:32 GMT-0400 (Eastern Daylight Time)"
     },
     {
       "id": 12,
       "title": "Buy groceries",
-      "completed": false
+      "completed": false,
+      "created" : "Tue Jul 26 2022 16:22:32 GMT-0400 (Eastern Daylight Time)",
+      "finished" : "Tue Jul 26 2022 16:22:32 GMT-0400 (Eastern Daylight Time)"
     },
     {
       "id": 13,
       "title": "Complete leet code problem set",
-      "completed": false
+      "completed": false,
+      "created" : "Tue Jul 26 2022 16:22:32 GMT-0400 (Eastern Daylight Time)",
+      "finished" : "Tue Jul 26 2022 16:22:32 GMT-0400 (Eastern Daylight Time)"
     }
 ]

@@ -4,8 +4,11 @@ import './App.css';
 import Todos from './components/Todos';
 import Header from './components/layout/header';
 import AddTodo from './components/AddTodo';
-import About from './components/pages/About';
 import {v4 as uuid} from "uuid"; 
+
+//pages
+import About from './components/pages/About';
+import Archive from './components/pages/Archive';
 
 
 class App extends Component{
@@ -17,7 +20,7 @@ class App extends Component{
     componentDidMount() {
       fetch('/data')
         .then(res => res.json())
-        .then(todos => this.setState({todos}, () => console.log('fetch', todos)));      
+        .then(todos => this.setState({todos}, () => console.log('fetch', todos))); 
     }
 
     //Deletes a todoItem
@@ -31,25 +34,27 @@ class App extends Component{
 
     //toggle Complete attribute for a TodoItem
     markComplete = (id) => {
-      let completedTodo;
+      var completedTodo;
       //here we basically replace the entire todos list in state with a new modified version with the changed todoItem
       this.setState({todos: this.state.todos.map(todo => {
         if (todo.id === id) {
           todo.completed = !todo.completed
+          todo.finished = Date().toLocaleString();
           completedTodo = todo;
+          console.log(completedTodo);
         }
         return todo;
       })});
 
-      this.setState({completedTodos : [...this.state.completedTodos, completedTodo]});
+      
 
-      console.log("Completed Todos : ", this.state.completedTodos);
+      this.setState({completedTodos : [...this.state.completedTodos, completedTodo]});
 
       fetch('/complete', {
         method: 'post',
         headers : {'Accept' : 'application/json', 'Content-type' : 'application/json'},
-        body : JSON.stringify({id : id})
-      }).then((res) => res.json()).then((todos) => this.setState({todos}, () => console.log('onDelete', todos)));
+        body : JSON.stringify(completedTodo)
+      }).then((res) => res.json()).then((todos) => this.setState({todos}, () => console.log('complete', todos)));
     }
 
     //add a new todo to state and database 
@@ -58,7 +63,9 @@ class App extends Component{
       const newTodo = {
         id : uuid(),
         title : title,
-        completed : false
+        completed : false,
+        created : Date(),
+        finished : ""
       };
 
       this.setState({todos : [...this.state.todos, newTodo]});
@@ -71,7 +78,6 @@ class App extends Component{
     }
 
     render() {
-      console.log(this.state.todos)
       return (
         <BrowserRouter>
           <div className='App'>
@@ -85,6 +91,7 @@ class App extends Component{
                   </>
                 }/>
                 <Route path="/about" element={<About/>}/>
+                <Route path="/archive" element={<Archive/>}/>
               </Routes>
             </div>
           </div>
