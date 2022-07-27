@@ -8,6 +8,7 @@ class Todos extends Component{
         return (
             this.props.todos.map((todo) => (
                 <TodoItem 
+                    archive={this.props.archive}
                     onDelete={this.props.onDelete}
                     markComplete={this.props.markComplete} 
                     todo={todo} 

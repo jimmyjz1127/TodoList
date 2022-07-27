@@ -13,14 +13,22 @@ import Archive from './components/pages/Archive';
 
 class App extends Component{
     state = {
-      todos: [],
-      completedTodos: []
+      todos: []
     }
 
     componentDidMount() {
       fetch('/data')
         .then(res => res.json())
         .then(todos => this.setState({todos}, () => console.log('fetch', todos))); 
+    }
+
+    archive = (id) => {
+      fetch('/archiveTodo', {
+        method: 'post',
+        headers: {'Accept' : 'application/json', 'Content-type' : 'application/json'},
+        body : JSON.stringify({id : id})
+      }).then(res => res.json())
+        .then(todos => this.setState({todos}, console.log('archive', todos)));
     }
 
     //Deletes a todoItem
@@ -34,21 +42,22 @@ class App extends Component{
 
     //toggle Complete attribute for a TodoItem
     markComplete = (id) => {
+
       var completedTodo;
       //here we basically replace the entire todos list in state with a new modified version with the changed todoItem
       this.setState({todos: this.state.todos.map(todo => {
         if (todo.id === id) {
-          todo.completed = !todo.completed
-          todo.finished = Date().toLocaleString();
-          completedTodo = todo;
-          console.log(completedTodo);
+          if (todo.completed === false)
+          {
+            todo.completed = !todo.completed
+            todo.finished = Date().toLocaleString();
+            completedTodo = todo;
+          }
+          else
+            completedTodo = {};
         }
         return todo;
       })});
-
-      
-
-      this.setState({completedTodos : [...this.state.completedTodos, completedTodo]});
 
       fetch('/complete', {
         method: 'post',
@@ -87,7 +96,7 @@ class App extends Component{
                 <Route exact path="/" element={
                   <>
                     <AddTodo addTodo={this.addTodo}/>
-                    <Todos onDelete={this.onDelete} markComplete={this.markComplete} todos={this.state.todos}/>
+                    <Todos archive={this.archive} onDelete={this.onDelete} markComplete={this.markComplete} todos={this.state.todos}/>
                   </>
                 }/>
                 <Route path="/about" element={<About/>}/>

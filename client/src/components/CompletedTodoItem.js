@@ -18,6 +18,7 @@ class CompletedTodoItem extends Component {
                     {title}
                 </h2>
                 <p>
+                    <button onClick={this.props.delArchivedTodo.bind(this, id)} style={btnStyle}>x</button>
                     <text style={{fontWeight:"bold"}}>Todo Created : </text>
                     {created}
                     <br/>
@@ -27,6 +28,16 @@ class CompletedTodoItem extends Component {
             </div>
         );
     }
+}
+
+const btnStyle = {
+    background: "#ff0000",
+    color: '#fff',
+    border: 'none',
+    padding: '5px 10px',
+    borderRadius: '50%',
+    cursor: 'pointer',
+    float: 'right'
 }
 
 CompletedTodoItem.propTypes = {

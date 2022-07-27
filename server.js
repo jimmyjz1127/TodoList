@@ -9,7 +9,7 @@ const path = require('path');
 app.use(express.json());
 app.use(urlencoded());
 
-
+//runs server and handles http requests 
 function runServer() {
     app.get('/data', (req,res) => {
         res.header("Content-Type", "application/json");
@@ -36,12 +36,21 @@ function runServer() {
         res.sendFile(path.join(__dirname, "database.json"));
     });
 
+    app.post('/delArchivedTodo', (req,res) => {
+        delArchivedTodo(req.body.id);
+        res.sendFile(path.join(__dirname, "archive.json"));
+    });
 
+    app.post('/archiveTodo', (req,res) => {
+        archiveTodo(req.body.id);
+        res.sendFile(path.join(__dirname, "database.json"));
+    });
 
     var port = 5000;
     app.listen(port, () => console.log("Server running on Port " + port));
 }
 
+//deletes todo from todolist archive 
 function deleteTodo(deleteID) {
     var fs = require('fs');
 
@@ -57,34 +66,52 @@ function deleteTodo(deleteID) {
     fs.writeFileSync('./database.json', JSON.stringify(json));
 }
 
+//changes the todo in the database to complete
 function completeTodo(todo) {
     var fs = require('fs');
 
     var databaseFile = JSON.parse(fs.readFileSync(path.join(__dirname, 'database.json')));
 
-   
-
-    var json1 = [];
-    var json2 = [];
+    var database = [];
 
     databaseFile.forEach((line) => {
         if (line.id == todo.id) {
-            json2.push(todo);
+            line.completed = true;
         }
-        json1.push(line);
+        database.push(line);
     });
-    fs.writeFileSync('./database.json', JSON.stringify(json1));
-    
-
-    var archiveFile = JSON.parse(fs.readFileSync(path.join(__dirname, "archive.json")));
-
-    archiveFile.forEach((line) => {
-        json2.push(line);
-    });
-
-    fs.writeFileSync('./archive.json', JSON.stringify(json2));
+    fs.writeFileSync('./database.json', JSON.stringify(database));
 }
 
+//removes a todo from database and adds it to the arhive database 
+function archiveTodo(id) {
+    var fs = require('fs');
+
+    var databaseFile = JSON.parse(fs.readFileSync(path.join(__dirname, 'database.json')));
+
+    var archiveFile = JSON.parse(fs.readFileSync(path.join(__dirname, 'archive.json')));
+
+    var database = [];
+    var archive = [];
+
+    archiveFile.forEach((line) => {
+        archive.push(line);
+    });
+
+    databaseFile.forEach((line) => {
+        if (line.id == id) {
+            archive.push(line);
+        }
+        else {
+            database.push(line);
+        }
+    });
+
+    fs.writeFileSync('./archive.json', JSON.stringify(archive));
+    fs.writeFileSync('./database.json', JSON.stringify(database));
+}
+
+//adds a new todo item to the database
 function addTodo(data) {
     var fs = require('fs');
 
@@ -99,6 +126,23 @@ function addTodo(data) {
     json.push(data);
 
     fs.writeFileSync('./database.json', JSON.stringify(json));
+}
+
+//Deletes an archived todo from archive.json database
+function delArchivedTodo(deleteID) {
+    var fs = require('fs');
+
+    var jsonFile = JSON.parse(fs.readFileSync(path.join(__dirname, 'archive.json')));
+
+    var json = [];
+
+    jsonFile.forEach((line) => {
+        if (line.id !== deleteID){
+            json.push(line);
+        }
+    });
+
+    fs.writeFileSync('./archive.json', JSON.stringify(json));
 }
 
 

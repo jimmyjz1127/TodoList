@@ -6,7 +6,11 @@ class CompletedTodos extends Component {
     render() { 
         return (
             this.props.completedTodos.map((completedTodo) => (
-                <CompletedTodoItem key={completedTodo.id} completedTodo={completedTodo}/>
+                <CompletedTodoItem 
+                    delArchivedTodo={this.props.delArchivedTodo}
+                    key={completedTodo.id} 
+                    completedTodo={completedTodo}
+                />
             ))
         );
     }
